@@ -7,6 +7,9 @@ const nextConfig = {
   trailingSlash: true,
   basePath: isGitHubActions && repositoryName ? `/${repositoryName}` : "",
   assetPrefix: isGitHubActions && repositoryName ? `/${repositoryName}/` : "",
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isGitHubActions && repositoryName ? `/${repositoryName}` : "",
+  },
   typescript: {
     ignoreBuildErrors: true,
   },

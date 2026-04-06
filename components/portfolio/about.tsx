@@ -77,6 +77,7 @@ const cellVariants = {
 
 export function About() {
   const { theme, locale } = useTheme()
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
 
   const isEs = locale === "es"
 
@@ -209,7 +210,7 @@ export function About() {
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/images/claudio_vargas2.png"
+                    src={`${basePath}/images/claudio_vargas2.png`}
                     alt="Claudio Vargas — Full Stack Developer"
                     style={{
                       width: "95%",

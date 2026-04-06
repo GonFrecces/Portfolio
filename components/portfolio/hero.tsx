@@ -40,6 +40,7 @@ function Counter({ target, duration = 1500 }: { target: number; duration?: numbe
 
 export function Hero() {
   const { theme, locale } = useTheme()
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
   const isEs = locale === "es"
 
   const containerVariants = {
@@ -262,7 +263,7 @@ export function Hero() {
             </motion.a>
 
             <motion.a
-              href="/cv-claudio-vargas.pdf"
+              href={`${basePath}/cv-claudio-vargas.pdf`}
               download
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}

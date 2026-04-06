@@ -176,6 +176,7 @@ const BorderBeamCard = ({
 
 export function Skills() {
   const { theme, locale } = useTheme()
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
   const isEs = locale === "es"
   const allGroups = panels.flatMap(panel => panel.groups)
 
@@ -333,7 +334,7 @@ export function Skills() {
                           }}
                         >
                           <img
-                            src={iconPath}
+                            src={`${basePath}${iconPath}`}
                             alt={skill}
                             style={{ width: 40, height: 40, objectFit: "contain" }}
                           />
