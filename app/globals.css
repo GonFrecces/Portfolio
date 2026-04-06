@@ -1,0 +1,258 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* ─── Core palette ─── */
+  --bg-first: #000c0c;
+  --bg: #f5f4f0;
+  --bg-secondary: #eceae3;
+  --surface: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --border-hover: rgba(0, 0, 0, 0.25);
+  --text: #0c0c0c;
+  --text-muted: rgba(12, 12, 12, 0.45);
+  --accent: #e8ff57;
+  --accent-2: #57ffdb;
+  --accent-3: #b057ff;
+  --radius: 12px;
+
+  /* shadcn compat */
+  --background: #f5f4f0;
+  --foreground: #0c0c0c;
+  --card: #ffffff;
+  --card-foreground: #0c0c0c;
+  --popover: #ffffff;
+  --popover-foreground: #0c0c0c;
+  --primary: #0c0c0c;
+  --primary-foreground: #f5f4f0;
+  --secondary: #eceae3;
+  --secondary-foreground: #0c0c0c;
+  --muted: #eceae3;
+  --muted-foreground: rgba(12, 12, 12, 0.5);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --input: rgba(0, 0, 0, 0.1);
+  --ring: #e8ff57;
+  --radius-val: 12px;
+}
+
+.dark {
+  --bg-first: #f5f4f0;
+  --bg: #0c0c0c;
+  --bg-secondary: #161616;
+  --surface: #111111;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(232, 255, 87, 0.35);
+  --text: #f0f0f0;
+  --text-muted: rgba(240, 240, 240, 0.4);
+  --accent: #e8ff57;
+  --accent-2: #57ffdb;
+  --accent-3: #b057ff;
+
+  /* shadcn compat */
+  --background: #0c0c0c;
+  --foreground: #f0f0f0;
+  --card: #111111;
+  --card-foreground: #f0f0f0;
+  --popover: #111111;
+  --popover-foreground: #f0f0f0;
+  --primary: #f0f0f0;
+  --primary-foreground: #0c0c0c;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #f0f0f0;
+  --muted: #1a1a1a;
+  --muted-foreground: rgba(240, 240, 240, 0.4);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: #e8ff57;
+}
+
+@theme inline {
+  --font-sans: 'JetBrains Mono', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius-val) - 4px);
+  --radius-md: calc(var(--radius-val) - 2px);
+  --radius-lg: var(--radius-val);
+  --radius-xl: calc(var(--radius-val) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+    height: 100%;
+    overflow: hidden;
+  }
+  body {
+    background-color: var(--bg-first);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    /* Body border */
+    padding: 12px;
+    min-height: 100vh;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 4px; }
+}
+
+/* ─── Marquee ─── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Float pills ─── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ─── Pulse dot ─── */
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.pulse-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse-ring 1.5s ease-out infinite;
+}
+
+/* ─── Iridescent card ─── */
+.project-card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: calc(var(--radius) + 1px);
+  background: conic-gradient(
+    from var(--hue, 0deg),
+    #57ffdb, #e8ff57, #ff5757, #b057ff, #ff9a57, #57ffdb
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+  animation: hue-spin 4s linear infinite paused;
+}
+.project-card:hover::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+@keyframes hue-spin {
+  to { --hue: 360deg; }
+}
+@property --hue {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+.project-card .card-inner {
+  position: relative;
+  z-index: 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  height: 100%;
+}
+.project-card:hover {
+  transform: perspective(800px) scale(1.02) translateY(-6px);
+}
+
+/* ─── Border beam on bento hover ─── */
+@keyframes beam-rotate {
+  to { --beam-angle: 360deg; }
+}
+@property --beam-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+.bento-cell {
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.bento-cell::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: calc(var(--radius) + 1px);
+  background: conic-gradient(from var(--beam-angle), transparent 70%, var(--accent) 80%, transparent 90%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 0;
+  pointer-events: none;
+  animation: beam-rotate 2s linear infinite paused;
+}
+.bento-cell:hover::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+.bento-cell > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Reading mode layout */
+.reading-grid {
+  display: grid;
+  grid-template-areas:
+    "photo bio bio status"
+    "photo skills skills status"
+    "exp1 exp1 exp2 exp2"
+    "tools tools certs certs"
+    "contact contact contact contact";
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto auto auto;
+  gap: 10px;
+  height: 100%;
+}
