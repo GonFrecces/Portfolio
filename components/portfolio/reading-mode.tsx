@@ -25,7 +25,6 @@ const certs = [
 
 export function ReadingMode() {
   const { theme, locale } = useTheme()
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
   const isEs = locale === "es"
 
   const cellStyle: React.CSSProperties = {
@@ -50,38 +49,13 @@ export function ReadingMode() {
     >
       <div className="reading-grid">
 
-        {/* PHOTO */}
-        <div style={{ ...cellStyle, gridArea: "photo", position: "relative", padding: 0, overflow: "hidden" }}>
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: bgCircleColor,
-              zIndex: 0,
-            }}
-          />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={`${basePath}/images/claudio_vargas2.png`}
-            alt="Claudio Vargas"
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block", position: "relative", zIndex: 1 }}
-            crossOrigin="anonymous"
-          />
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: "40%",
-              background: "linear-gradient(to top, var(--bg) 0%, var(--bg) 10%, transparent 100%)",
-              zIndex: 2,
-              pointerEvents: "none",
-            }}
-          />
-          <div style={{ position: "absolute", bottom: "12px", left: "12px", zIndex: 3 }}>
+        {/* IDENTITY (sin foto) */}
+        <div style={{ ...cellStyle, gridArea: "photo", position: "relative", display: "flex", flexDirection: "column", justifyContent: "flex-end", minHeight: "220px" }}>
+          <div style={{ position: "absolute", inset: 0, background: bgCircleColor, zIndex: 0 }} />
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <p style={{ fontSize: "56px", fontWeight: 900, lineHeight: 1, margin: "0 0 12px 0", WebkitTextStroke: "2px var(--text)", color: "transparent", letterSpacing: "-0.04em" }}>CV</p>
             <p style={{ fontSize: "16px", fontWeight: 800, color: "var(--text)", margin: "0 0 2px 0" }}>Claudio Vargas</p>
-            <p style={{ fontSize: "11px", color: "var(--accent)", margin: 0, fontStyle: "italic" }}>&gt; Full Stack Developer</p>
+            <p style={{ fontSize: "11px", color: theme === "dark" ? "var(--accent)" : "var(--text)", margin: 0, fontStyle: "italic" }}>&gt; Full Stack Developer</p>
           </div>
         </div>
 
