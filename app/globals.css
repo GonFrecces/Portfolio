@@ -290,6 +290,7 @@
 
 /* ─── Grilla de proyectos ─── */
 .project-tile {
+  padding: 1px; /* marco fino visible alrededor de la miniatura */
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -304,4 +305,7 @@
   opacity: 0.55;
   user-select: none;
 
+}
+.project-thumb {
+  border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
 }

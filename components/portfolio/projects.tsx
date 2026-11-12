@@ -50,7 +50,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       transition={{ duration: 0.45, delay: index * 0.06, ease: "easeOut" }}
       className="project-tile group flex flex-col overflow-hidden"
     >
-      <div className="aspect-[16/10] overflow-hidden" style={{ borderBottom: "1px solid var(--border)" }}>
+      <div className="project-thumb aspect-[16/10] shrink-0 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`${basePath}${project.thumbnail}`}
@@ -111,8 +111,8 @@ function PlaceholderCard({ index }: { index: number }) {
       className="project-tile project-tile--empty flex flex-col overflow-hidden"
     >
       <div
-        className="flex aspect-[16/10] items-center justify-center"
-        style={{ borderBottom: "1px dashed var(--border-hover)", background: "var(--bg-secondary)" }}
+        className="project-thumb flex aspect-[16/10] shrink-0 items-center justify-center"
+        style={{ background: "var(--bg-secondary)" }}
       >
         <Plus size={22} style={{ color: "var(--text-muted)" }} />
       </div>
