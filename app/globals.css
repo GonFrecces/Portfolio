@@ -307,5 +307,6 @@
 
 }
 .project-thumb {
-  border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+  /* radio de la card - borde (1px) - padding (1px) */
+  border-radius: calc(var(--radius) - 2px) calc(var(--radius) - 2px) 0 0;
 }
