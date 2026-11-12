@@ -179,22 +179,39 @@ function formatDuration(months: number, isEs: boolean) {
 type Pt = { x: number; y: number }
 
 /**
- * Camino serpenteante: baja en vertical junto a cada hito (fuera de las cards)
- * y cruza al otro lado en el espacio entre hitos con una curva en S.
+ * Camino serpenteante tipo carretera: una spline Catmull-Rom (continuidad C1, sin
+ * esquinas) que pasa por cada hito, baja por su costado curvándose hacia afuera y
+ * cruza al otro lado por el espacio libre entre hitos con una curva en S amplia.
  */
-function buildPath(nodes: Pt[], gaps: number[]) {
-  if (!nodes.length) return ""
-  const r = 46 // radio de la curva en el cruce
-  let d = `M ${nodes[0].x} 0 L ${nodes[0].x} ${nodes[0].y}`
-  for (let i = 0; i < nodes.length - 1; i++) {
-    const a = nodes[i]
-    const b = nodes[i + 1]
-    const g = gaps[i]
-    d += ` L ${a.x} ${g - r}`
-    d += ` C ${a.x} ${g + r * 0.2}, ${b.x} ${g - r * 0.2}, ${b.x} ${g + r}`
-    d += ` L ${b.x} ${b.y}`
+function catmullRom(points: Pt[], tension = 1) {
+  if (points.length < 2) return ""
+  const p = [points[0], ...points, points[points.length - 1]]
+  let d = `M ${points[0].x} ${points[0].y}`
+  for (let i = 1; i < p.length - 2; i++) {
+    const [p0, p1, p2, p3] = [p[i - 1], p[i], p[i + 1], p[i + 2]]
+    const c1 = { x: p1.x + ((p2.x - p0.x) / 6) * tension, y: p1.y + ((p2.y - p0.y) / 6) * tension }
+    const c2 = { x: p2.x - ((p3.x - p1.x) / 6) * tension, y: p2.y - ((p3.y - p1.y) / 6) * tension }
+    d += ` C ${c1.x} ${c1.y}, ${c2.x} ${c2.y}, ${p2.x} ${p2.y}`
   }
   return d
+}
+
+type StopGeo = { node: Pt; top: number; bottom: number; gap?: number }
+
+function buildPath(stops: StopGeo[], width: number) {
+  if (!stops.length) return ""
+  const mid = width / 2
+  const pts: Pt[] = [{ x: stops[0].node.x, y: 0 }]
+  stops.forEach((s, i) => {
+    pts.push(s.node)
+    if (s.gap === undefined) return
+    // Baja por el costado del hito, ya fuera de la card
+    pts.push({ x: s.node.x, y: s.bottom })
+    // Cruce suave por el centro, en el espacio entre hitos
+    const next = stops[i + 1].node
+    pts.push({ x: (s.node.x + next.x) / 2 || mid, y: s.gap })
+  })
+  return catmullRom(pts, 1)
 }
 
 // ─── Componente ───
@@ -224,13 +241,16 @@ export function Experience() {
     const rel = (r: DOMRect) => ({ x: r.left + r.width / 2 - box.left, y: r.top + r.height / 2 - box.top })
     const nodes = Array.from(el.querySelectorAll<HTMLElement>(".route-node")).map(n => rel(n.getBoundingClientRect()))
     const stopsEls = Array.from(el.querySelectorAll<HTMLElement>(".route-stop"))
-    const gaps = stopsEls.slice(0, -1).map((s, i) => {
-      const bottom = s.getBoundingClientRect().bottom - box.top
-      const nextTop = stopsEls[i + 1].getBoundingClientRect().top - box.top
-      return (bottom + nextTop) / 2
+    const geoStops: StopGeo[] = stopsEls.map((s, i) => {
+      const rect = s.getBoundingClientRect()
+      const bottom = rect.bottom - box.top
+      const top = rect.top - box.top
+      const next = stopsEls[i + 1]
+      const gap = next ? (bottom + next.getBoundingClientRect().top - box.top) / 2 : undefined
+      return { node: nodes[i], top, bottom, gap }
     })
     if (!nodes.length) return
-    setGeo({ d: buildPath(nodes, gaps), w: box.width, h: box.height })
+    setGeo({ d: buildPath(geoStops, box.width), w: box.width, h: box.height })
   }, [])
 
   useLayoutEffect(() => {

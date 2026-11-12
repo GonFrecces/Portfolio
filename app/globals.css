@@ -382,7 +382,7 @@
 .route-stop {
   position: relative;
   display: flex;
-  margin-bottom: 96px;
+  margin-bottom: 170px; /* espacio para que la ruta cruce con curvas amplias */
 }
 .route-stop:last-child { margin-bottom: 0; }
 .route-stop--left { justify-content: flex-start; padding-left: 12%; }
@@ -390,7 +390,7 @@
 
 .route-node {
   position: absolute;
-  top: 18px;
+  top: -22px; /* el hito asoma sobre la card: la ruta llega a él antes de la card */
   z-index: 2;
   display: flex;
   align-items: center;
@@ -448,7 +448,7 @@
 }
 
 @media (max-width: 767px) {
-  .route-stop { margin-bottom: 64px; }
+  .route-stop { margin-bottom: 72px; }
   .route-stop--left, .route-stop--right { justify-content: flex-start; padding: 0 0 0 64px; }
   .route-node { width: 38px; height: 38px; }
   .route-stop--left .route-node { left: 14px; margin-left: -19px; }
