@@ -58,7 +58,7 @@ export function Contact() {
               fontSize: "clamp(3rem, 8vw, 8rem)",
               fontWeight: 900,
               /* WebkitTextStroke: theme === "dark" ? "transparent" : "2px var(--text)", */
-              color: theme === "dark" ? "var(--accent)" : "var(--text)",
+              color: "var(--accent)",
               letterSpacing: "-0.03em",
               lineHeight: 1,
             }}
@@ -117,7 +117,7 @@ export function Contact() {
               borderRadius: "8px",
               border: "1px solid var(--border)",
               background: copied ? "var(--accent)" : "var(--bg)",
-              color: copied ? "#0c0c0c" : "var(--text-muted)",
+              color: copied ? "var(--accent-contrast)" : "var(--text-muted)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",

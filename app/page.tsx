@@ -161,7 +161,7 @@ function PortfolioContent() {
                   width: 50,
                   height: 50,
                   borderRadius: "999px",
-                  border: theme === "dark" ? "1px solid #e8ff57" : "1px solid var(--border)",
+                  border: theme === "dark" ? "1px solid var(--accent)" : "1px solid var(--border)",
                   background: theme === "dark" ? "rgba(12,12,12,0.72)" : "var(--surface)",
                   color: "var(--text)",
                   display: "flex",
@@ -170,7 +170,7 @@ function PortfolioContent() {
                   fontSize: "22px",
                   fontWeight: 700,
                   cursor: "pointer",
-                  boxShadow: theme === "dark" ? "0 0 0 1px rgba(232,255,87,0.18)" : "0 0 0 1px rgba(0,0,0,0.16)",
+                  boxShadow: theme === "dark" ? "0 0 0 1px rgba(139,133,255,0.22)" : "0 0 0 1px rgba(0,0,0,0.16)",
                   backdropFilter: "blur(8px)",
                   WebkitBackdropFilter: "blur(8px)",
                   pointerEvents: "auto",
@@ -202,7 +202,7 @@ function PortfolioContent() {
           background: theme === "dark" ? "rgba(12,12,12,0.72)" : "rgba(245,244,240,0.82)",
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
-          boxShadow: theme === "dark" ? "0 8px 24px rgba(232,255,87,0.18)" : "0 8px 24px rgba(0,0,0,0.16)",
+          boxShadow: theme === "dark" ? "0 8px 24px rgba(139,133,255,0.22)" : "0 8px 24px rgba(0,0,0,0.16)",
         }}
       >
 
@@ -229,7 +229,7 @@ function PortfolioContent() {
             }}
             onMouseEnter={e => {
               ;(e.currentTarget as HTMLElement).style.borderColor = theme === "dark" ? "var(--accent)" : "var(--border-hover)"
-              ;(e.currentTarget as HTMLElement).style.color = theme === "dark" ? "var(--accent)" : "var(--text)"
+              ;(e.currentTarget as HTMLElement).style.color = "var(--accent)"
             }}
             onMouseLeave={e => {
               ;(e.currentTarget as HTMLElement).style.borderColor = "var(--border)"

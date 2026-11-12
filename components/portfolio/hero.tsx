@@ -66,7 +66,7 @@ export function Hero() {
   }
 
   const bgCircleColor = theme === "dark"
-    ? "radial-gradient(ellipse at center, rgba(232,255,87,0.18) 0%, transparent 70%)"
+    ? "radial-gradient(ellipse at center, rgba(139,133,255,0.22) 0%, transparent 70%)"
     : "radial-gradient(ellipse at center, rgba(12,12,12,0.42) 0%, transparent 70%)"
 
   return (
@@ -201,7 +201,7 @@ export function Hero() {
             }}
           >
             {isEs
-              ? <><span style={{ color: { light: "var(--text)", dark: "var(--accent)" }[theme], fontSize: "15px", fontWeight: 900, letterSpacing: "0.04em", margin: 0,}}>{"> Desarrollador Full Stack "}</span> <span>{" con 4 años de experiencia creando aplicaciones web eficientes y escalables"}</span></>
+              ? <><span style={{ color: "var(--accent)", fontSize: "15px", fontWeight: 900, letterSpacing: "0.04em", margin: 0,}}>{"> Desarrollador Full Stack "}</span> <span>{" con 4 años de experiencia creando aplicaciones web eficientes y escalables"}</span></>
               : <><span style={{ color: { light: "var(--accent)", dark: "var(--accent)" }[theme], fontSize: "13px", fontWeight: 900, letterSpacing: "0.04em", margin: 0,}}>{"> Full Stack Developer "}</span> <span>{" with 4 years of experience building efficient and scalable web applications"}</span></>}
           </motion.p>
 
@@ -223,7 +223,7 @@ export function Hero() {
                 borderRadius: "999px",
                 border: theme === "dark" ? '' : "1px solid rgba(12,12,12,0.75)",
                 backgroundColor: "var(--accent)",
-                color: "#0c0c0c",
+                color: "var(--accent-contrast)",
                 fontSize: "12px",
                 fontWeight: 700,
                 letterSpacing: "0.05em",

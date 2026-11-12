@@ -14,7 +14,7 @@ const cellVariants = {
 export function About() {
   const { theme, locale } = useTheme()
   const isEs = locale === "es"
-  const accentText = theme === "dark" ? "var(--accent)" : "var(--text)"
+  const accentText = "var(--accent)"
 
   const facts = [
     { icon: Briefcase, label: isEs ? "Experiencia" : "Experience", value: isEs ? "4+ años en desarrollo" : "4+ years building software" },

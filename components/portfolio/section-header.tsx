@@ -18,7 +18,7 @@ export function SectionHeader({ index, label, title }: { index: string; label: s
       <div>
         <p
           className="m-0 text-[11px] font-bold tracking-[0.15em]"
-          style={{ color: theme === "dark" ? "var(--accent)" : "var(--text)" }}
+          style={{ color: "var(--accent)" }}
         >
           {index} - {label}
         </p>

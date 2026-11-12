@@ -13,9 +13,11 @@
   --border-hover: rgba(0, 0, 0, 0.25);
   --text: #0c0c0c;
   --text-muted: rgba(12, 12, 12, 0.45);
-  --accent: #e8ff57;
-  --accent-2: #57ffdb;
-  --accent-3: #b057ff;
+  /* Paleta B · Índigo eléctrico + cian */
+  --accent: #4f46e5;
+  --accent-contrast: #ffffff;
+  --accent-2: #0e7490;
+  --accent-3: #7c3aed;
   --radius: 12px;
 
   /* shadcn compat */
@@ -34,7 +36,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
   --input: rgba(0, 0, 0, 0.1);
-  --ring: #e8ff57;
+  --ring: #4f46e5;
   --radius-val: 12px;
 }
 
@@ -44,12 +46,13 @@
   --bg-secondary: #161616;
   --surface: #111111;
   --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(232, 255, 87, 0.35);
+  --border-hover: rgba(139, 133, 255, 0.4);
   --text: #f0f0f0;
   --text-muted: rgba(240, 240, 240, 0.4);
-  --accent: #e8ff57;
+  --accent: #8b85ff;
+  --accent-contrast: #0c0c0c;
   --accent-2: #57ffdb;
-  --accent-3: #b057ff;
+  --accent-3: #b8a6ff;
 
   /* shadcn compat */
   --background: #0c0c0c;
@@ -65,7 +68,7 @@
   --muted: #1a1a1a;
   --muted-foreground: rgba(240, 240, 240, 0.4);
   --input: rgba(255, 255, 255, 0.08);
-  --ring: #e8ff57;
+  --ring: #8b85ff;
 }
 
 @theme inline {
@@ -176,7 +179,7 @@
   border-radius: calc(var(--radius) + 1px);
   background: conic-gradient(
     from var(--hue, 0deg),
-    #57ffdb, #e8ff57, #ff5757, #b057ff, #ff9a57, #57ffdb
+    #57ffdb, #8b85ff, #4f46e5, #0e7490, #8b85ff, #57ffdb
   );
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -257,8 +260,8 @@
   height: 100%;
 }
 /* ─── Secciones y pills compartidas ─── */
-:root { --spotlight-color: rgba(12, 12, 12, 0.06); }
-.dark { --spotlight-color: rgba(232, 255, 87, 0.09); }
+:root { --spotlight-color: rgba(79, 70, 229, 0.07); }
+.dark { --spotlight-color: rgba(139, 133, 255, 0.10); }
 
 .portfolio-section {
   padding-top: 80px;
@@ -284,7 +287,7 @@
 }
 .tag-pill--accent {
   border-color: var(--accent);
-  background: rgba(232, 255, 87, 0.12);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
   color: var(--text);
 }
 
@@ -312,7 +315,7 @@
 }
 
 /* ─── Trayectoria: ruta serpenteante ─── */
-:root { --route-trail: var(--accent-3); }
+:root { --route-trail: var(--accent); }
 .dark { --route-trail: var(--accent); }
 
 .route-switch {
@@ -353,7 +356,7 @@
 }
 .route-switch-btn.is-on .route-switch-count {
   background: var(--route-trail);
-  color: #0c0c0c;
+  color: var(--accent-contrast);
 }
 
 .route-track { padding-bottom: 8px; }

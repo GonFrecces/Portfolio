@@ -85,7 +85,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           className="mt-auto inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[11px] font-bold tracking-wider no-underline transition-transform hover:scale-[1.04]"
           style={{
             background: "var(--accent)",
-            color: "#0c0c0c",
+            color: "var(--accent-contrast)",
             border: theme === "dark" ? "none" : "1px solid rgba(12,12,12,0.75)",
           }}
         >

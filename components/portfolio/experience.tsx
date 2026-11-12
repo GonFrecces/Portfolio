@@ -196,7 +196,7 @@ export function Experience() {
   const { theme, locale } = useTheme()
   const isEs = locale === "es"
   const t = (v: Lang) => (isEs ? v.es : v.en)
-  const accentText = theme === "dark" ? "var(--accent)" : "var(--text)"
+  const accentText = "var(--accent)"
 
   const [route, setRoute] = useState<RouteId>("dev")
   const [open, setOpen] = useState<Record<string, boolean>>({})

@@ -84,7 +84,7 @@ export function Navbar() {
           alignItems: "center",
           justifyContent: "center",
           flexShrink: 0,
-          color: "#0c0c0c",
+          color: "var(--accent-contrast)",
           fontWeight: 800,
           fontSize: "13px",
           letterSpacing: "-0.5px",
@@ -177,7 +177,7 @@ export function Navbar() {
           }}
           onMouseEnter={e => {
             ;(e.currentTarget as HTMLElement).style.background = "var(--accent)"
-            ;(e.currentTarget as HTMLElement).style.color = "#0c0c0c"
+            ;(e.currentTarget as HTMLElement).style.color = "var(--accent-contrast)"
           }}
           onMouseLeave={e => {
             ;(e.currentTarget as HTMLElement).style.background = "transparent"

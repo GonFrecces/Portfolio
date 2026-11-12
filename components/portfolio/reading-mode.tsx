@@ -36,7 +36,7 @@ export function ReadingMode() {
   }
 
   const bgCircleColor = theme === "dark"
-    ? "radial-gradient(ellipse at center, rgba(232,255,87,0.15) 0%, transparent 65%)"
+    ? "radial-gradient(ellipse at center, rgba(139,133,255,0.18) 0%, transparent 65%)"
     : "radial-gradient(ellipse at center, rgba(12,12,12,0.2) 0%, transparent 65%)"
 
   return (
@@ -55,7 +55,7 @@ export function ReadingMode() {
           <div style={{ position: "relative", zIndex: 1 }}>
             <p style={{ fontSize: "56px", fontWeight: 900, lineHeight: 1, margin: "0 0 12px 0", WebkitTextStroke: "2px var(--text)", color: "transparent", letterSpacing: "-0.04em" }}>CV</p>
             <p style={{ fontSize: "16px", fontWeight: 800, color: "var(--text)", margin: "0 0 2px 0" }}>Claudio Vargas</p>
-            <p style={{ fontSize: "11px", color: theme === "dark" ? "var(--accent)" : "var(--text)", margin: 0, fontStyle: "italic" }}>&gt; Full Stack Developer</p>
+            <p style={{ fontSize: "11px", color: "var(--accent)", margin: 0, fontStyle: "italic" }}>&gt; Full Stack Developer</p>
           </div>
         </div>
 
