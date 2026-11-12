@@ -303,20 +303,21 @@
 .skill-chip {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   min-width: 0;
-  padding: 7px 10px;
+  padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid transparent;
   background: var(--bg);
   color: var(--text);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
+  border-color: var(--border);
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 .skill-chip img {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
   object-fit: contain;
 }

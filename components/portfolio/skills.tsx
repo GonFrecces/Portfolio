@@ -111,7 +111,7 @@ export function Skills() {
     <section id="skills" className="portfolio-section">
       <SectionHeader index="02" label={isEs ? "HABILIDADES" : "SKILLS"} title={isEs ? "Stack tecnológico" : "Tech stack"} />
 
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {groups.map((group, gi) => (
           <motion.div
             key={group.id}
@@ -119,10 +119,10 @@ export function Skills() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.45, delay: (gi % 3) * 0.06, ease: "easeOut" }}
-            className="skill-panel flex flex-col p-5"
+            className="skill-panel flex flex-col p-6"
             style={{ ["--group-color" as string]: group.color } as React.CSSProperties}
           >
-            <div className="mb-4 flex items-center justify-between gap-3">
+            <div className="mb-5 flex items-center justify-between gap-3">
               <h3 className="m-0 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.12em]" style={{ color: "var(--text)" }}>
                 <span className="h-2 w-2 rounded-full" style={{ background: group.color }} />
                 {isEs ? group.label.es : group.label.en}
@@ -137,12 +137,12 @@ export function Skills() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="m-0 grid list-none grid-cols-2 gap-1.5 p-0"
+              className="m-0 grid list-none grid-cols-2 gap-2 p-0"
             >
               {group.skills.map(skill => (
                 <motion.li key={skill.name} variants={itemVariants} className="skill-chip">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={`${basePath}/svg/${skill.icon}`} alt="" aria-hidden width={18} height={18} loading="lazy" />
+                  <img src={`${basePath}/svg/${skill.icon}`} alt="" aria-hidden width={20} height={20} loading="lazy" />
                   <span className="truncate">{skill.name}</span>
                 </motion.li>
               ))}
