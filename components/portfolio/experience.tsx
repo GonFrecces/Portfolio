@@ -59,7 +59,7 @@ export function Experience() {
 
   return (
     <section id="experience" className="portfolio-section">
-      <SectionHeader index="04" label={isEs ? "EXPERIENCIA" : "EXPERIENCE"} title={isEs ? "Trayectoria" : "Work history"} />
+      <SectionHeader index="03" label={isEs ? "EXPERIENCIA" : "EXPERIENCE"} title={isEs ? "Trayectoria" : "Work history"} />
 
       <div className="relative ml-4 md:ml-6">
         {/* Línea base + progreso */}
