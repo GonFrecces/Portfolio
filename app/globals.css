@@ -256,3 +256,34 @@
   gap: 10px;
   height: 100%;
 }
+/* ─── Secciones y pills compartidas ─── */
+:root { --spotlight-color: rgba(12, 12, 12, 0.06); }
+.dark { --spotlight-color: rgba(232, 255, 87, 0.09); }
+
+.portfolio-section {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+@media (width > 1000px) {
+  .portfolio-section { padding-top: 120px; }
+}
+
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.tag-pill--accent {
+  border-color: var(--accent);
+  background: rgba(232, 255, 87, 0.12);
+  color: var(--text);
+}
