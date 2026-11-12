@@ -5,11 +5,13 @@ import { ArrowUpRight, Plus } from "lucide-react"
 import { useTheme } from "@/components/theme-provider"
 import { SectionHeader } from "@/components/portfolio/section-header"
 
+type Stack = { backend: string[]; frontend: string[]; cloud: string[] }
+
 type Project = {
   title: string
   thumbnail: string
   url: string
-  stack: string[]
+  stack: Stack
 }
 
 // Para agregar un proyecto: suma un objeto aquí. Las celdas restantes se
@@ -19,11 +21,21 @@ const projects: Project[] = [
     title: "Prioris",
     thumbnail: "/projects/prioris.jpg",
     url: "https://priorisdev.netlify.app",
-    stack: ["React", "TypeScript", "FastAPI", "PostgreSQL", "Tailwind v4"],
+    stack: {
+      backend: ["Python", "FastAPI", "SQLModel", "PostgreSQL", "Redis", "JWT"],
+      frontend: ["React", "TypeScript", "Vite", "Tailwind v4", "shadcn/ui"],
+      cloud: ["Docker", "GitHub Actions", "Neon", "Render", "Netlify"],
+    },
   },
 ]
 
 const GRID_SLOTS = 6
+
+const layerLabel = {
+  backend: { es: "Backend", en: "Backend" },
+  frontend: { es: "Frontend", en: "Frontend" },
+  cloud: { es: "Nube y DevOps", en: "Cloud & DevOps" },
+}
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { theme, locale } = useTheme()
@@ -51,11 +63,20 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       <div className="flex flex-1 flex-col gap-4 p-5">
         <h3 className="m-0 text-lg font-extrabold" style={{ color: "var(--text)" }}>{project.title}</h3>
 
-        <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">
-          {project.stack.map(s => (
-            <li key={s} className="tag-pill">{s}</li>
+        <dl className="m-0 flex flex-col gap-2.5">
+          {(["backend", "frontend", "cloud"] as const).map(layer => (
+            <div key={layer} className="flex flex-col gap-1.5">
+              <dt className="text-[9px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--text-muted)" }}>
+                {layerLabel[layer][isEs ? "es" : "en"]}
+              </dt>
+              <dd className="m-0 flex flex-wrap gap-1.5">
+                {project.stack[layer].map(s => (
+                  <span key={s} className="tag-pill">{s}</span>
+                ))}
+              </dd>
+            </div>
           ))}
-        </ul>
+        </dl>
 
         <a
           href={project.url}
@@ -123,7 +144,7 @@ export function Projects() {
     <section id="projects" className="portfolio-section">
       <SectionHeader index="02" label={isEs ? "PROYECTOS" : "PROJECTS"} title={isEs ? "Proyectos" : "Projects"} />
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 p-2 sm:grid-cols-2 sm:p-3 lg:grid-cols-3">
         {projects.map((p, i) => (
           <ProjectCard key={p.title} project={p} index={i} />
         ))}
