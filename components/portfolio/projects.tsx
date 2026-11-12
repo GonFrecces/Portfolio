@@ -1,174 +1,136 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowUpRight, Activity, ShieldCheck, ListOrdered, Gauge } from "lucide-react"
+import { ArrowUpRight, Plus } from "lucide-react"
 import { useTheme } from "@/components/theme-provider"
-import { CardSpotlight } from "@/components/ui/card-spotlight"
 import { SectionHeader } from "@/components/portfolio/section-header"
 
-const PRIORIS_URL = "https://priorisdev.netlify.app"
+type Project = {
+  title: string
+  thumbnail: string
+  url: string
+  stack: string[]
+}
 
-const stack = [
-  "React", "TypeScript", "Vite", "shadcn/ui", "Tailwind v4",
-  "FastAPI", "SQLModel", "PostgreSQL · Neon", "JWT", "OpenTelemetry", "Docker", "GitHub Actions",
+// Para agregar un proyecto: suma un objeto aquí. Las celdas restantes se
+// rellenan con placeholders deshabilitados hasta completar la grilla.
+const projects: Project[] = [
+  {
+    title: "Prioris",
+    thumbnail: "/projects/prioris.jpg",
+    url: "https://priorisdev.netlify.app",
+    stack: ["React", "TypeScript", "FastAPI", "PostgreSQL", "Tailwind v4"],
+  },
 ]
 
-const queue = [
-  { code: "P-014", label: "Control crónico", score: 92, level: "Alta" },
-  { code: "P-027", label: "Derivación dental", score: 74, level: "Media" },
-  { code: "P-031", label: "Curación", score: 58, level: "Media" },
-  { code: "P-009", label: "Control sano", score: 31, level: "Baja" },
-]
+const GRID_SLOTS = 6
 
-export function Projects() {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { theme, locale } = useTheme()
   const isEs = locale === "es"
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
 
-  const highlights = [
-    {
-      icon: ListOrdered,
-      title: isEs ? "Motor de priorización" : "Prioritization engine",
-      text: isEs ? "Ordena la lista de espera con reglas clínicas explícitas y trazables." : "Orders the waiting list with explicit, traceable clinical rules.",
-    },
-    {
-      icon: ShieldCheck,
-      title: isEs ? "Roles y auditoría" : "Roles & audit",
-      text: isEs ? "JWT verificado en el backend, permisos por centro y registro de eventos." : "Backend-verified JWT, per-center permissions and event log.",
-    },
-    {
-      icon: Activity,
-      title: isEs ? "Observabilidad" : "Observability",
-      text: isEs ? "Trazas OpenTelemetry desde el navegador y request-id en la API." : "Browser OpenTelemetry traces and request IDs in the API.",
-    },
-    {
-      icon: Gauge,
-      title: isEs ? "Calidad" : "Quality",
-      text: isEs ? "Pruebas unitarias e integración sobre Postgres real, CI/CD por capas." : "Unit and integration tests on real Postgres, layered CI/CD.",
-    },
-  ]
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.45, delay: index * 0.06, ease: "easeOut" }}
+      className="project-tile group flex flex-col overflow-hidden"
+    >
+      <div className="aspect-[16/10] overflow-hidden" style={{ borderBottom: "1px solid var(--border)" }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`${basePath}${project.thumbnail}`}
+          alt={isEs ? `Vista previa de ${project.title}` : `${project.title} preview`}
+          loading="lazy"
+          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+        />
+      </div>
+
+      <div className="flex flex-1 flex-col gap-4 p-5">
+        <h3 className="m-0 text-lg font-extrabold" style={{ color: "var(--text)" }}>{project.title}</h3>
+
+        <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0">
+          {project.stack.map(s => (
+            <li key={s} className="tag-pill">{s}</li>
+          ))}
+        </ul>
+
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-auto inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[11px] font-bold tracking-wider no-underline transition-transform hover:scale-[1.04]"
+          style={{
+            background: "var(--accent)",
+            color: "#0c0c0c",
+            border: theme === "dark" ? "none" : "1px solid rgba(12,12,12,0.75)",
+          }}
+        >
+          {isEs ? "[ VISITAR APP ]" : "[ VISIT APP ]"}
+          <ArrowUpRight size={13} />
+        </a>
+      </div>
+    </motion.article>
+  )
+}
+
+function PlaceholderCard({ index }: { index: number }) {
+  const { locale } = useTheme()
+  const isEs = locale === "es"
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.45, delay: index * 0.06, ease: "easeOut" }}
+      aria-disabled="true"
+      className="project-tile project-tile--empty flex flex-col overflow-hidden"
+    >
+      <div
+        className="flex aspect-[16/10] items-center justify-center"
+        style={{ borderBottom: "1px dashed var(--border-hover)", background: "var(--bg-secondary)" }}
+      >
+        <Plus size={22} style={{ color: "var(--text-muted)" }} />
+      </div>
+
+      <div className="flex flex-1 flex-col gap-4 p-5">
+        <div className="h-4 w-1/2 rounded" style={{ background: "var(--bg-secondary)" }} />
+        <div className="flex gap-1.5">
+          {[48, 64, 40].map(w => (
+            <span key={w} className="h-5 rounded-full" style={{ width: w, background: "var(--bg-secondary)" }} />
+          ))}
+        </div>
+        <span
+          className="mt-auto inline-flex w-fit cursor-not-allowed items-center rounded-full px-4 py-2 text-[11px] font-bold tracking-wider"
+          style={{ border: "1px dashed var(--border-hover)", color: "var(--text-muted)" }}
+        >
+          {isEs ? "[ PRÓXIMAMENTE ]" : "[ COMING SOON ]"}
+        </span>
+      </div>
+    </motion.div>
+  )
+}
+
+export function Projects() {
+  const { locale } = useTheme()
+  const isEs = locale === "es"
+  const placeholders = Math.max(GRID_SLOTS - projects.length, 0)
 
   return (
     <section id="projects" className="portfolio-section">
-      <SectionHeader index="03" label={isEs ? "PROYECTOS" : "PROJECTS"} title={isEs ? "Proyecto destacado" : "Featured project"} />
+      <SectionHeader index="02" label={isEs ? "PROYECTOS" : "PROJECTS"} title={isEs ? "Proyectos" : "Projects"} />
 
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.55, ease: "easeOut" }}
-      >
-        <CardSpotlight>
-          <div className="grid gap-8 p-6 md:p-10 lg:grid-cols-[1.25fr_1fr]">
-            {/* Info */}
-            <div className="flex flex-col gap-5">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="tag-pill tag-pill--accent">HealthTech · SaaS</span>
-                <span className="tag-pill">
-                  <span className="pulse-dot" style={{ width: 6, height: 6 }} />
-                  {isEs ? "En producción" : "Live"}
-                </span>
-              </div>
-
-              <div>
-                <h3 className="m-0 text-3xl font-extrabold tracking-tight md:text-4xl" style={{ color: "var(--text)" }}>
-                  Prioris
-                </h3>
-                <p className="mt-1 text-sm italic" style={{ color: "var(--text-muted)" }}>
-                  Turno Justo
-                </p>
-              </div>
-
-              <p className="m-0 max-w-xl text-[13px] leading-relaxed" style={{ color: "var(--text)" }}>
-                {isEs
-                  ? "Lista de espera priorizada para centros de atención primaria. Reemplaza el orden de llegada por criterios clínicos visibles, para que el equipo sepa a quién atender primero y por qué."
-                  : "Prioritized waiting list for primary care centers. It replaces first-come ordering with visible clinical criteria, so staff know who to see first and why."}
-              </p>
-
-              <div className="grid gap-3 sm:grid-cols-2">
-                {highlights.map(h => (
-                  <div key={h.title} className="flex gap-3 rounded-lg p-3" style={{ border: "1px solid var(--border)", background: "var(--bg)" }}>
-                    <h.icon size={16} className="mt-0.5 shrink-0" style={{ color: theme === "dark" ? "var(--accent)" : "var(--text)" }} />
-                    <div>
-                      <p className="m-0 text-xs font-bold" style={{ color: "var(--text)" }}>{h.title}</p>
-                      <p className="m-0 mt-1 text-[11px] leading-snug" style={{ color: "var(--text-muted)" }}>{h.text}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-wrap gap-1.5">
-                {stack.map(s => (
-                  <span key={s} className="tag-pill">{s}</span>
-                ))}
-              </div>
-
-              <div>
-                <motion.a
-                  href={PRIORIS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-bold tracking-wider no-underline"
-                  style={{
-                    background: "var(--accent)",
-                    color: "#0c0c0c",
-                    border: theme === "dark" ? "none" : "1px solid rgba(12,12,12,0.75)",
-                  }}
-                >
-                  {isEs ? "[ VER APP ]" : "[ OPEN APP ]"}
-                  <ArrowUpRight size={14} />
-                </motion.a>
-              </div>
-            </div>
-
-            {/* Visual: cola priorizada (ilustrativa, sin imágenes) */}
-            <div
-              aria-hidden
-              className="relative flex flex-col justify-center gap-2 rounded-xl p-5"
-              style={{ background: "var(--bg)", border: "1px solid var(--border)" }}
-            >
-              <div className="mb-2 flex items-center justify-between">
-                <span className="text-[10px] font-bold tracking-[0.15em]" style={{ color: "var(--text-muted)" }}>
-                  {isEs ? "LISTA DE ESPERA" : "WAITING LIST"}
-                </span>
-                <span className="text-[10px]" style={{ color: "var(--text-muted)" }}>score ↓</span>
-              </div>
-              {queue.map((row, i) => (
-                <motion.div
-                  key={row.code}
-                  initial={{ opacity: 0, x: 16 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.15 + i * 0.1, ease: "easeOut" }}
-                  className="flex items-center gap-3 rounded-lg px-3 py-2.5"
-                  style={{ background: "var(--surface)", border: "1px solid var(--border)" }}
-                >
-                  <span className="w-5 text-xs font-extrabold" style={{ color: "var(--text-muted)" }}>{i + 1}</span>
-                  <div className="min-w-0 flex-1">
-                    <p className="m-0 truncate text-xs font-bold" style={{ color: "var(--text)" }}>{row.label}</p>
-                    <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full" style={{ background: "var(--bg-secondary)" }}>
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${row.score}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, delay: 0.3 + i * 0.1, ease: "easeOut" }}
-                        className="h-full rounded-full"
-                        style={{ background: i === 0 ? "var(--accent)" : "var(--text-muted)" }}
-                      />
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-semibold" style={{ color: "var(--text-muted)" }}>{row.code}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </CardSpotlight>
-      </motion.div>
-
-      <p className="mt-4 text-[11px]" style={{ color: "var(--text-muted)" }}>
-        {isEs ? "// Más proyectos en desarrollo." : "// More projects in progress."}
-      </p>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {projects.map((p, i) => (
+          <ProjectCard key={p.title} project={p} index={i} />
+        ))}
+        {Array.from({ length: placeholders }, (_, i) => (
+          <PlaceholderCard key={`empty-${i}`} index={projects.length + i} />
+        ))}
+      </div>
     </section>
   )
 }

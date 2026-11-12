@@ -37,7 +37,7 @@ export function Contact() {
         style={{ textAlign: "center", marginBottom: "48px" }}
       >
         <p style={{ fontSize: "11px", color: "var(--accent)", letterSpacing: "0.15em", fontWeight: 700, margin: "0 0 16px 0" }}>
-          {isEs ? "05 - CONTACTO" : "05 - CONTACT"}
+          {isEs ? "04 - CONTACTO" : "04 - CONTACT"}
         </p>
 
         <div style={{ lineHeight: 0.95, marginBottom: "16px" }}>

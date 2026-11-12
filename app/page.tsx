@@ -6,7 +6,6 @@ import { AnimatePresence, motion } from "framer-motion"
 import { Navbar } from "@/components/portfolio/navbar"
 import { Hero } from "@/components/portfolio/hero"
 import { About } from "@/components/portfolio/about"
-import { Skills } from "@/components/portfolio/skills"
 import { Experience } from "@/components/portfolio/experience"
 import { Projects } from "@/components/portfolio/projects"
 import { Contact } from "@/components/portfolio/contact"
@@ -107,7 +106,6 @@ function PortfolioContent() {
             >
               <Hero />
               <About />
-              <Skills />
               <Projects />
               <Experience />
               <Contact />

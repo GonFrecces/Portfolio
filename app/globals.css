@@ -288,39 +288,19 @@
   color: var(--text);
 }
 
-/* ─── Stack tecnológico ─── */
-.skill-panel {
+/* ─── Grilla de proyectos ─── */
+.project-tile {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-top: 2px solid var(--group-color, var(--border));
   border-radius: var(--radius);
-  transition: border-color 0.25s ease;
+  transition: border-color 0.25s ease, transform 0.25s ease;
 }
-.skill-panel:hover {
+.project-tile:not(.project-tile--empty):hover {
   border-color: var(--border-hover);
-  border-top-color: var(--group-color, var(--border-hover));
+  transform: translateY(-4px);
 }
-.skill-chip {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-  padding: 7px 10px;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  background: var(--bg);
-  color: var(--text);
-  font-size: 11px;
-  font-weight: 500;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
-}
-.skill-chip img {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  object-fit: contain;
-}
-.skill-chip:hover {
-  border-color: var(--border-hover);
-  background: var(--bg-secondary);
+.project-tile--empty {
+  border-style: dashed;
+  opacity: 0.55;
+  user-select: none;
 }
