@@ -42,6 +42,9 @@ export function Hero() {
   const { theme, locale } = useTheme()
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? ""
   const isEs = locale === "es"
+  // Años como desarrollador desde noviembre de 2021 (ingreso a SoftCapture)
+  const now = new Date()
+  const devYears = Math.floor(((now.getFullYear() - 2021) * 12 + (now.getMonth() + 1 - 11)) / 12)
 
   const containerVariants = {
     hidden: {},
@@ -201,8 +204,8 @@ export function Hero() {
             }}
           >
             {isEs
-              ? <><span style={{ color: "var(--accent)", fontSize: "15px", fontWeight: 900, letterSpacing: "0.04em", margin: 0,}}>{"> Desarrollador Full Stack "}</span> <span>{" con 4 años de experiencia creando aplicaciones web eficientes y escalables"}</span></>
-              : <><span style={{ color: { light: "var(--accent)", dark: "var(--accent)" }[theme], fontSize: "13px", fontWeight: 900, letterSpacing: "0.04em", margin: 0,}}>{"> Full Stack Developer "}</span> <span>{" with 4 years of experience building efficient and scalable web applications"}</span></>}
+              ? <><span style={{ color: "var(--accent)", fontSize: "15px", fontWeight: 900, letterSpacing: "0.04em", margin: 0,}}>{"> Desarrollador Full Stack "}</span> <span>{` con ${devYears} años de experiencia creando aplicaciones web eficientes y escalables`}</span></>
+              : <><span style={{ color: { light: "var(--accent)", dark: "var(--accent)" }[theme], fontSize: "13px", fontWeight: 900, letterSpacing: "0.04em", margin: 0,}}>{"> Full Stack Developer "}</span> <span>{` with ${devYears} years of experience building efficient and scalable web applications`}</span></>}
           </motion.p>
 
           {/* CTAs */}

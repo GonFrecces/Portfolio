@@ -27,7 +27,8 @@ type Stop = {
   icon: LucideIcon
   title: string
   role: Lang
-  period: Lang
+  /** Sin período cuando no hay fechas confirmadas */
+  period?: Lang
   place?: Lang
   bullets?: Lang[]
   techs?: string[]
@@ -116,7 +117,6 @@ const healthRoute: Stop[] = [
     icon: Stethoscope,
     title: "Cruz Roja y clínicas particulares",
     role: { es: "Asistente Dental", en: "Dental Assistant" },
-    period: { es: "2014 — 2018", en: "2014 — 2018" },
     place: { es: "Temuco · Valparaíso", en: "Temuco · Valparaíso" },
     bullets: [
       { es: "Asistencia clínica en la Cruz Roja y en clínicas dentales particulares.", en: "Clinical assistance at the Red Cross and private dental clinics." },
@@ -159,6 +159,12 @@ function monthsBetween(from: [number, number], to?: [number, number]) {
   const now = new Date()
   const [ty, tm] = to ?? [now.getFullYear(), now.getMonth() + 1]
   return Math.max((ty - from[0]) * 12 + (tm - from[1]), 0)
+}
+
+/** Ruta de salud: solo años, porque los meses exactos no están confirmados */
+function formatYears(months: number, isEs: boolean) {
+  const y = Math.floor(months / 12)
+  return isEs ? `${y} ${y === 1 ? "año" : "años"}` : `${y} ${y === 1 ? "yr" : "yrs"}`
 }
 
 function formatDuration(months: number, isEs: boolean) {
@@ -333,14 +339,14 @@ export function Experience() {
             >
               {id === "dev" ? <Code2 size={13} /> : <HeartPulse size={13} />}
               {id === "dev" ? (isEs ? "Ruta desarrollo" : "Dev route") : (isEs ? "Ruta salud" : "Health route")}
-              <span className="route-switch-count">{formatDuration(id === "dev" ? devMonths : healthMonths, isEs)}</span>
+              <span className="route-switch-count">{id === "dev" ? formatDuration(devMonths, isEs) : formatYears(healthMonths, isEs)}</span>
             </button>
           ))}
         </div>
         <p className="m-0 text-[11px]" style={{ color: "var(--text-muted)" }}>
           {route === "dev"
             ? isEs ? `${formatDuration(totalMonths, true)} construyendo software` : `${formatDuration(totalMonths, false)} building software`
-            : isEs ? `${formatDuration(totalMonths, true)} en el área de la salud` : `${formatDuration(totalMonths, false)} in healthcare`}
+            : isEs ? `${formatYears(totalMonths, true)} en el área de la salud` : `${formatYears(totalMonths, false)} in healthcare`}
         </p>
       </div>
 
@@ -395,19 +401,19 @@ export function Experience() {
                   <div className="route-reveal flex flex-col gap-2">
                     <span className="route-badge self-start">
                       <span className="pulse-dot" style={{ width: 6, height: 6 }} />
-                      {t(stop.period)}
+                      {stop.period && t(stop.period)}
                     </span>
                     <p className="m-0 text-[15px] font-extrabold" style={{ color: "var(--text)" }}>
                       {route === "dev"
                         ? isEs ? `${formatDuration(devMonths, true)} como desarrollador` : `${formatDuration(devMonths, false)} as a developer`
-                        : isEs ? `${formatDuration(healthMonths, true)} de experiencia en salud` : `${formatDuration(healthMonths, false)} of healthcare experience`}
+                        : isEs ? `${formatYears(healthMonths, true)} de experiencia en salud` : `${formatYears(healthMonths, false)} of healthcare experience`}
                     </p>
                     <p className="m-0 text-xs" style={{ color: "var(--text-muted)" }}>{t(stop.role)}</p>
                   </div>
                 ) : (
                   <>
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="route-reveal route-badge">{t(stop.period)}</span>
+                      {stop.period && <span className="route-reveal route-badge">{t(stop.period)}</span>}
                       {duration && <span className="route-reveal tag-pill">{duration}</span>}
                       {stop.kind === "edu" && <span className="route-reveal tag-pill">{isEs ? "Título" : "Degree"}</span>}
                     </div>
