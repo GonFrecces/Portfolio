@@ -323,7 +323,7 @@ export function Experience() {
 
   return (
     <section id="experience" ref={root} className="portfolio-section">
-      <SectionHeader index="03" label={isEs ? "EXPERIENCIA" : "EXPERIENCE"} title={isEs ? "Trayectoria" : "Work history"} />
+      <SectionHeader index="02" label={isEs ? "EXPERIENCIA" : "EXPERIENCE"} title={isEs ? "Trayectoria" : "Work history"} />
 
       {/* Selector de ruta */}
       <div className="mb-10 flex flex-wrap items-center justify-between gap-4">

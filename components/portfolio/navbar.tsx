@@ -27,8 +27,8 @@ export function Navbar() {
 
   const navLinks = [
     { label: isEs ? "Sobre mi" : "About", href: "#about" },
-    { label: isEs ? "Proyectos" : "Projects", href: "#projects" },
     { label: isEs ? "Experiencia" : "Experience", href: "#experience" },
+    { label: isEs ? "Proyectos" : "Projects", href: "#projects" },
     { label: isEs ? "Contacto" : "Contact", href: "#contact" },
   ]
 

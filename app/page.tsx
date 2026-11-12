@@ -107,8 +107,8 @@ function PortfolioContent() {
             >
               <Hero />
               <About />
-              <Projects />
               <Experience />
+              <Projects />
               <Contact />
             </main>
           ) : (

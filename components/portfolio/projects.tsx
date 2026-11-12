@@ -142,7 +142,7 @@ export function Projects() {
 
   return (
     <section id="projects" className="portfolio-section">
-      <SectionHeader index="02" label={isEs ? "PROYECTOS" : "PROJECTS"} title={isEs ? "Proyectos" : "Projects"} />
+      <SectionHeader index="03" label={isEs ? "PROYECTOS" : "PROJECTS"} title={isEs ? "Proyectos" : "Projects"} />
 
       <div className="grid grid-cols-1 gap-5 p-2 sm:grid-cols-2 sm:p-3 lg:grid-cols-3">
         {projects.map((p, i) => (
