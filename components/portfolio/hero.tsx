@@ -264,7 +264,7 @@ export function Hero() {
 
             <motion.a
               href={`${basePath}/cv-claudio-vargas.pdf`}
-              download
+              download="Claudio Vargas - Curriculum Full Stack Developer.pdf"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
               style={{

@@ -310,3 +310,47 @@
   /* radio de la card - borde (1px) - padding (1px) */
   border-radius: calc(var(--radius) - 2px) calc(var(--radius) - 2px) 0 0;
 }
+
+/* ─── Trayectoria (GSAP) ─── */
+.xp-marker {
+  background: var(--bg);
+  border: 1px solid var(--border-hover);
+  z-index: 2;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.xp-item.is-current .xp-marker {
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 6px rgba(232, 255, 87, 0.18);
+}
+.xp-year {
+  color: var(--text);
+  opacity: 0.04;
+  letter-spacing: -0.05em;
+  transition: opacity 0.4s ease;
+}
+.xp-item.is-current .xp-year { opacity: 0.09; }
+.xp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+.xp-item.is-current .xp-card {
+  border-color: var(--border-hover);
+  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.35);
+}
+.xp-bullet {
+  position: relative;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+.xp-bullet::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--text);
+  opacity: 0.5;
+}
+.dark .xp-bullet::before { color: var(--accent); opacity: 0.8; }

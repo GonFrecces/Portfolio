@@ -96,9 +96,9 @@ export function ReadingMode() {
             <p style={{ fontSize: "10px", color: "var(--text-muted)", letterSpacing: "0.1em", fontWeight: 700, margin: "0 0 6px 0" }}>CURRENT</p>
             <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
               <span className="pulse-dot" />
-              <span style={{ fontSize: "11px", fontWeight: 800, color: "var(--text)" }}>SCM LATAM</span>
+              <span style={{ fontSize: "11px", fontWeight: 800, color: "var(--text)" }}>GoodRabbit</span>
             </div>
-            <p style={{ fontSize: "11px", color: "var(--accent)", margin: "0 0 2px 0", fontStyle: "italic" }}>Junior Developer</p>
+            <p style={{ fontSize: "11px", color: "var(--accent)", margin: "0 0 2px 0", fontStyle: "italic" }}>FullStack Developer Semi Senior</p>
             <p style={{ fontSize: "10px", color: "var(--text-muted)", margin: 0 }}>{isEs ? "Ago 2022 — Presente" : "Aug 2022 — Present"}</p>
           </div>
           <div style={{ borderTop: "1px solid var(--border)", paddingTop: "12px" }}>
@@ -121,12 +121,12 @@ export function ReadingMode() {
         <div style={{ ...cellStyle, gridArea: "exp1" }}>
           <div style={{ borderLeft: "3px solid var(--accent)", paddingLeft: "12px" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px", flexWrap: "wrap", gap: "6px" }}>
-              <p style={{ fontSize: "13px", fontWeight: 800, color: "var(--text)", margin: 0 }}>SCM LATAM</p>
+              <p style={{ fontSize: "13px", fontWeight: 800, color: "var(--text)", margin: 0 }}>GoodRabbit</p>
               <span style={{ padding: "2px 8px", borderRadius: "999px", border: "1px solid var(--accent)", fontSize: "10px", color: "var(--accent)", fontWeight: 600 }}>
                 Ago 2022 — Presente
               </span>
             </div>
-            <p style={{ fontSize: "11px", color: "var(--accent)", fontStyle: "italic", margin: "0 0 10px 0" }}>Junior Developer</p>
+            <p style={{ fontSize: "11px", color: "var(--accent)", fontStyle: "italic", margin: "0 0 10px 0" }}>FullStack Developer Semi Senior</p>
             <ul style={{ listStyle: "none", padding: 0, margin: "0 0 10px 0", display: "flex", flexDirection: "column", gap: "4px" }}>
               {["Microservicios con comunicación asíncrona (RabbitMQ)", "Backend Python: FastAPI, Django, Flask", "Frontend React + TypeScript", "TDD, DDD, CI/CD con GitHub Actions", "Profiling y optimización de consultas SQL", "Integración JWT, roles y permisos"].map(b => (
                 <li key={b} style={{ fontSize: "11px", color: "var(--text-muted)", lineHeight: 1.5 }}>

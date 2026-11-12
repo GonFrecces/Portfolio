@@ -89,6 +89,7 @@ function PortfolioContent() {
       <Navbar />
 
       <div
+        id="portfolio-scroller"
         style={{
           position: "relative",
           height: "100%",
